@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM yihongwang/provisioner-action:0.1
 
 COPY LICENSE README.md /
 

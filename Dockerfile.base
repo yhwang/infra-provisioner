@@ -1,0 +1,21 @@
+FROM debian:buster-slim
+
+RUN apt-get -q update && apt-get install -y --no-install-recommends \
+    wget curl jq ca-certificates &&  apt-get -q clean
+
+RUN curl -L https://download.clis.cloud.ibm.com/ibm-cloud-cli/2.1.1/IBM_Cloud_CLI_2.1.1_amd64.tar.gz | tar zxvf - \
+    && Bluemix_CLI/install
+
+RUN ibmcloud plugin install container-service -r Bluemix -v 1.0.312 \
+    && ibmcloud plugin install container-registry -r Bluemix -v 0.1.547 \
+    && ibmcloud plugin install cloud-functions -r Bluemix -v 1.0.56  \
+    && ibmcloud plugin install schematics -r Bluemix -v 1.6.0 \
+    && ibmcloud plugin install doi -r Bluemix -v 0.3.3 \
+    && ibmcloud plugin install cis -r Bluemix -v 1.13.4 \
+    && ibmcloud cf install -v 6.53.0 --force
+
+COPY LICENSE README.md /
+
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

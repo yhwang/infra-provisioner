@@ -2,11 +2,25 @@ name: 'infra-provisioner'
 description: 'provision cluster'
 author: 'yhwang'
 inputs: 
-  param1:
-    description: 'param1'
-    default: 'value1'
+  api-key:
+    description: 'api-key'
+  region:
+    description: 'region'
+  org:
+    description: 'organization'
+  space:
+    description: 'space'
+  resource:
+    description: 'resource group'
+  filename:
+    description: 'filename to check'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.param1 }}
+    - ${{ inputs.api-key }}
+    - ${{ inputs.region }}
+    - ${{ inputs.org }}
+    - ${{ inputs.space }}
+    - ${{ inputs.resource }}
+    - ${{ inputs.filename}}
