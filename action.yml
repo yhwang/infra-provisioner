@@ -1,12 +1,12 @@
-name: 'Container Action Template'
-description: 'Get started with Container actions'
-author: 'GitHub'
+name: 'infra-provisioner'
+description: 'provision cluster'
+author: 'yhwang'
 inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+  param1:
+    description: 'param1'
+    default: 'value1'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.myInput }}
+    - ${{ inputs.param1 }}
